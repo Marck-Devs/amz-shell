@@ -1,0 +1,13 @@
+{
+    "name": "marck-devs/amz-shell",
+    "description": "Simple shell for amazon sp api",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "marck-devs/simple-logger": "^1.0",
+        "marck-devs/amazon-sp-api-php": "^2.1"
+    },
+    "autoload": {
+        "psr-4" : { "MarckDevs\\AmzShell\\": "src/" }
+    }
+}
