@@ -18,7 +18,8 @@ class Console{
         -m "ID1 ID2"        set marketplace in quotes and space between: -m "AV2FSG2 AGHWE3R5"
         -t TYPE             set the feed type
         -g FEED_ID          get feed data
-        --report DOC_ID     get xml report\n
+        --report DOC_ID     get xml report
+        -v                  set verbose\n
     HELP;
 
     private static $wrapper;
