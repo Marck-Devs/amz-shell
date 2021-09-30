@@ -7,7 +7,7 @@ use MarckDevs\SimpleLogger\SimpleLogger;
 
 class Console{
     
-    const SHORT_ARGUMENTS = "ht:v";
+    const SHORT_ARGUMENTS = "ht:g:vl:";
     const LONG_ARGUMENTS= ['config:', 'xml:', 'cred:', "content_type:", "marketplaces:", "report:"];
     const HELP = <<<HELP
       ---| Amazon SP simple shell |---
@@ -15,10 +15,12 @@ class Console{
 
         --xml XML_FILE      set the xml file to upload
         --cred CREDENTIALS  set the file with credentials
+        --content_type TYPE set the content type of the file DEFAULT: text/xml; charset=utf-8
+        --report DOC_ID     get xml report
         -m "ID1 ID2"        set marketplace in quotes and space between: -m "AV2FSG2 AGHWE3R5"
         -t TYPE             set the feed type
         -g FEED_ID          get feed data
-        --report DOC_ID     get xml report
+        -l FEED_TYPE        list feeds type
         -v                  set verbose\n
     HELP;
 
@@ -75,9 +77,6 @@ class Console{
             if(!isset(self::$wrapper["cred"])){
                 echo $this->error("\nCredentials needed and not found.\n\n");
                 $this->printHelp();
-            } elseif (!isset(self::$wrapper["t"])){
-                echo $this->error("\nFeed type needed and not found.\n\n");
-                $this->printHelp();
             }else{
                 $this->getFeed();
             }
@@ -86,13 +85,29 @@ class Console{
             if(!isset(self::$wrapper["cred"])){
                 echo $this->error("\nCredentials needed and not found.\n\n");
                 $this->printHelp();
-            } elseif (!isset(self::$wrapper["t"])){
-                echo $this->error("\nFeed type needed and not found.\n\n");
-                $this->printHelp();
             }else{
                 $this->getDoc();
             }
         }
+
+        if(isset(self::$wrapper["l"])){
+            if(!isset(self::$wrapper["cred"])){
+                echo $this->error("\nCredentials needed and not found.\n\n");
+                $this->printHelp();
+            }else{
+                $this->listFeeds();
+            }
+        }
+
+        echo "\n";
+    }
+
+    private function listFeeds(){
+        $this->loadCred();
+        self::$log->info("Initialize the controller");
+        $this->config->feeds_type = self::$wrapper["l"];
+        $controller = new Controller($this->config);
+        $controller->listFeeds();
     }
 
     private function load($arr, $obj){
@@ -103,9 +118,10 @@ class Console{
 
     private function uploadFeed(){
         $this->loadCred();
-        $controller = new Controller($this->config);
+        $this->config->feed_type = self::$wrapper["t"];
         $this->config->file = $this->xml;
         $this->config->marketplaces_ids = explode(' ', $this->marketplaces);
+        $controller = new Controller($this->config);
         self::$log->info("Initialize controller");
         $controller->uploadXML();
     }
@@ -114,6 +130,7 @@ class Console{
         $this->loadCred();
         $controller = new Controller($this->config);
         self::$log->info("Start conection to amazon");
+        echo $this->g."\n\n";
         $controller->getFeed($this->g);
     }
 
@@ -142,7 +159,7 @@ class Console{
             $data_arr = json_decode($data, true);
             $this->load($data_arr, $this->config);
         }
-
+        
         if(!isset($this->config->content_type)){
             $this->config->content_type = "text/xml; charset=utf-8";
         }

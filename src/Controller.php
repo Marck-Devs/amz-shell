@@ -139,14 +139,33 @@ class Controller{
         try{
             self::$log->info("Getting feed info");
             $feed = $api->getFeed($id);
-            $response = $feed->getPayload();
-            echo json_encode($response, JSON_PRETTY_PRINT);
+            echo $feed->getPayload();
         }catch(ApiException $e){
             $time = time();
             $error = <<<JSON
                 {
                     "error": "Error while getting feed data",
-                    "body": $response,
+                    "body": $feed,
+                    "time": $time
+                }
+            JSON;
+            echo $error;
+        }
+    }
+    public function listFeeds(){
+        self::$log->info("Getting access conf");
+        $config = $this->createConfig();
+        $api = new FeedsApi($config);
+        try{
+            self::$log->info("Getting feed info");
+            $feed = $api->getFeeds($this->config->feeds_type);
+            echo (string)$feed;
+        }catch(ApiException $e){
+            $time = time();
+            $error = <<<JSON
+                {
+                    "error": "Error while getting feed data",
+                    "body": $feed,
                     "time": $time
                 }
             JSON;
