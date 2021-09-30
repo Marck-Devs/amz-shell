@@ -4,7 +4,7 @@ namespace MarckDevs\AmzShell;
 use MarckDevs\SimpleLogger\SimpleLogger;
 
 class Config{
-    private static $wrapper;
+    public static $wrapper;
     public static $_instance;
     private static $log;
 
@@ -21,11 +21,16 @@ class Config{
     
     public function __set($name,$value){
         self::$wrapper[$name] = $value;
-        self::$log->debug("SET $name = $value");
+        if(gettype($value) != 'array')
+            self::$log->debug("SET $name = $value");
     }
 
     public function __get($name){
         self::$log->debug("GET $name");
         return self::$wrapper[$name];
+    }
+
+    public function toJson(){
+        return json_encode(self::$wrapper, JSON_PRETTY_PRINT);
     }
 }
