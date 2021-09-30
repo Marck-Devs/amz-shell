@@ -9,7 +9,7 @@ use MarckDevs\SimpleLogger\SimpleLogger;
 require 'vendor/autoload.php';
 
 class Format implements LogFormatter{
-   public function format($string, $data = []):string {
+   public function format($string, $data = []) {
         $format = "{date}  {lvl} - {msg}";
         return SimpleFormatter::set_data($format,
          SimpleFormatter::gen_arr($string, $data));
