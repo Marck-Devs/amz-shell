@@ -1,3 +1,7 @@
 vendor
 *.xml
 conf.json
+*.lock
+composer.lock
+*.env
+.env

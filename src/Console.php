@@ -13,15 +13,15 @@ class Console{
       ---| Amazon SP simple shell |---
     Usage: php amz-shell.php [OPTIONS]
 
-        --xml XML_FILE      set the xml file to upload
-        --cred CREDENTIALS  set the file with credentials
-        --content_type TYPE set the content type of the file DEFAULT: text/xml; charset=utf-8
-        --report DOC_ID     get xml report
-        -m "ID1 ID2"        set marketplace in quotes and space between: -m "AV2FSG2 AGHWE3R5"
-        -t TYPE             set the feed type
-        -g FEED_ID          get feed data
-        -l FEED_TYPE        list feeds type
-        -v                  set verbose\n
+        --xml XML_FILE          set the xml file to upload
+        --cred CREDENTIALS      set the file with credentials
+        --content_type TYPE     set the content type of the file DEFAULT: text/xml; charset=utf-8
+        --report DOC_ID         get xml report
+        -marketplaces "ID1 ID2" set marketplace in quotes and space between: -m "AV2FSG2 AGHWE3R5"
+        -t TYPE                 set the feed type
+        -g FEED_ID              get feed data
+        -l FEED_TYPE            list feeds type
+        -v                      set verbose\n
     HELP;
 
     private static $wrapper;
