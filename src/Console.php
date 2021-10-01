@@ -10,7 +10,7 @@ class Console{
     const SHORT_ARGUMENTS = "ht:g:vl:";
     const LONG_ARGUMENTS= ['config:', 'xml:', 'cred:', "content_type:", "marketplaces:", "report:"];
     const HELP = <<<HELP
-      ---| Amazon SP simple shell |---
+    ------| Amazon SP simple shell |------
     Usage: php amz-shell.php [OPTIONS]
 
         --xml XML_FILE          set the xml file to upload
@@ -72,31 +72,29 @@ class Console{
             else{
                 $this->uploadFeed();
             }
-        }
-        if(isset(self::$wrapper["g"])){
+        }elseif(isset(self::$wrapper["g"])){
             if(!isset(self::$wrapper["cred"])){
                 echo $this->error("\nCredentials needed and not found.\n\n");
                 $this->printHelp();
             }else{
                 $this->getFeed();
             }
-        }
-        if(isset(self::$wrapper["report"])){
+        }elseif(isset(self::$wrapper["report"])){
             if(!isset(self::$wrapper["cred"])){
                 echo $this->error("\nCredentials needed and not found.\n\n");
                 $this->printHelp();
             }else{
                 $this->getDoc();
             }
-        }
-
-        if(isset(self::$wrapper["l"])){
+        }elseif(isset(self::$wrapper["l"])){
             if(!isset(self::$wrapper["cred"])){
                 echo $this->error("\nCredentials needed and not found.\n\n");
                 $this->printHelp();
             }else{
                 $this->listFeeds();
             }
+        }else{
+            $this->printHelp();
         }
 
         echo "\n";
