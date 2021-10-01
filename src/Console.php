@@ -11,7 +11,7 @@ class Console{
     const LONG_ARGUMENTS= ['config:', 'xml:', 'cred:', "content_type:", "marketplaces:", "report:"];
     const HELP = <<<HELP
     ------| Amazon SP simple shell |------
-    Usage: php amz-shell.php [OPTIONS]
+    Usage: amz-shell [OPTIONS]
 
         --xml XML_FILE          set the xml file to upload
         --cred CREDENTIALS      set the file with credentials
