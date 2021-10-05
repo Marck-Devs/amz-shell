@@ -1,0 +1,25 @@
+\e[1;36m==========================================================================
+                        AMZ-SHELL INSTALL SCRIPT
+                                \e[0;35mmarck-devs\e[1;36m
+==========================================================================
+\e[0m
+Install the tool into the current OS.
+
+Take as script folder current: 
+        \e[0;33m/home/marck/Projects/amz-shell\e[0m
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|                                                       |
+|    Usage: sh install.sh [OPTIONS]                     |
+|        --server                Intall for servers     |
+|        -h, --help              Show this helps        |
+|                                                       |
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When install with server option, make a dir in the user home, 
+.bin folder, and add it to the .bashrc file as path variable
+
+\e[0;33mDefault instalation is for develope mode. Move the script 
+to the usr folder. Not recomended to any server, only for locally test.
+\e[0;31mNeed root access!
+\e[0m
+
